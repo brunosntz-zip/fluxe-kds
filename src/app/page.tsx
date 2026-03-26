@@ -1,65 +1,71 @@
-import Image from "next/image";
-
-export default function Home() {
+export default function KDSHome() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="flex flex-col h-screen w-full overflow-hidden">
+      
+      {/* 1. HEADER FIXO */}
+      <header className="h-24 border-b border-gray-800 flex items-center justify-between px-8 shrink-0">
+        <div className="flex items-center gap-4">
+          <div className="w-12 h-12 bg-action-blue rounded flex items-center justify-center font-bold text-2xl">F</div>
+          <h1 className="text-2xl font-bold tracking-widest">FLUXE KDS</h1>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        
+        <div className="flex gap-12 font-bold text-xl uppercase">
+          <div className="flex flex-col items-center">
+            <span className="text-status-red text-sm tracking-wider mb-1">Novos</span>
+            <span className="text-4xl text-status-red">2</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-status-yellow text-sm tracking-wider mb-1">Preparo</span>
+            <span className="text-4xl text-status-yellow">3</span>
+          </div>
+          <div className="flex flex-col items-center">
+            <span className="text-status-green text-sm tracking-wider mb-1">Prontos</span>
+            <span className="text-4xl text-status-green">1</span>
+          </div>
         </div>
-      </main>
-    </div>
+
+        <div className="text-4xl font-bold font-mono">
+          20:08
+        </div>
+      </header>
+
+      {/* 2. CONTEÚDO PRINCIPAL */}
+      <div className="flex flex-1 overflow-hidden">
+        
+        {/* Lado Esquerdo: Área dos Pedidos */}
+        <div className="flex-1 p-6 overflow-y-auto no-scrollbar">
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 1</div>
+            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 2</div>
+            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 3</div>
+            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 4</div>
+          </div>
+        </div>
+
+        {/* Lado Direito: Carga de Preparo */}
+        <aside className="w-96 border-l border-gray-800 bg-[#121419] p-6 flex flex-col shrink-0 overflow-y-auto no-scrollbar">
+          <h2 className="text-lg font-bold tracking-widest text-text-muted mb-8 uppercase border-b border-gray-800 pb-4">
+            Carga de Preparo
+          </h2>
+          
+          <div className="bg-fluxe-card border border-gray-800 rounded-lg p-5 flex justify-between items-center mb-3">
+            <div className="flex items-center gap-3">
+              <span className="text-gray-400 text-xl">🍷</span>
+              <span className="font-semibold text-lg">Caipirinha Limão</span>
+            </div>
+            <span className="bg-badge-purple px-4 py-1 rounded-md font-bold text-lg">2</span>
+          </div>
+
+          <div className="bg-fluxe-card border border-gray-800 rounded-lg p-5 flex justify-between items-center mb-3">
+            <div className="flex items-center gap-3">
+              <span className="text-gray-400 text-xl">🥃</span>
+              <span className="font-semibold text-lg">Whisky Double</span>
+            </div>
+            <span className="bg-badge-purple px-4 py-1 rounded-md font-bold text-lg">1</span>
+          </div>
+        </aside>
+
+      </div>
+    </main>
   );
 }
