@@ -1,6 +1,15 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-fluxe-bg: #0F1115;
+  --color-fluxe-card: #1A1D24;
+  --color-status-red: #B91C1C;
+  --color-status-yellow: #D97706;
+  --color-status-green: #15803D;
+  --color-action-blue: #2563EB;
+  --color-badge-purple: #7E22CE;
+  --color-text-muted: #9CA3AF;
+}
 
 /* Esconde a barra de rolagem mas mantém o scroll funcionando */
 .no-scrollbar::-webkit-scrollbar {

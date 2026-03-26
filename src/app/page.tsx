@@ -1,3 +1,46 @@
+import OrderCard from "@/components/OrderCard";
+
+// NOSSO MOCK (Dados de mentirinha simulando o Django)
+const mockPedidos = [
+  {
+    id: '#0041',
+    status: 'PENDENTE',
+    tipo_entrega: 'MESA',
+    // Coloquei a data de criação pra 15 minutos atrás pra você ver o aviso de atraso funcionando!
+    criado_em: new Date(Date.now() - 15 * 60000).toISOString(), 
+    mesa: { numero: '01' },
+    comanda: { cliente: { nome: 'Bruno', cpf: '12345678901' } },
+    item_pedido: [
+      { nome_produto_snapshot: 'Caipirinha Limão', quantidade: 2 },
+      { nome_produto_snapshot: 'Whisky Double', quantidade: 1, observacao: 'Sem Gelo' },
+      { nome_produto_snapshot: 'Água sem gás', quantidade: 1 }
+    ]
+  },
+  {
+    id: '#0042',
+    status: 'EM_PREPARO',
+    tipo_entrega: 'RETIRADA',
+    criado_em: new Date(Date.now() - 4 * 60000).toISOString(), // 4 minutos atrás
+    comanda: { cliente: { nome: 'Daniel', cpf: '98765432100' } },
+    item_pedido: [
+      { nome_produto_snapshot: 'Gin Tônica', quantidade: 1, observacao: 'Zimbro' },
+      { nome_produto_snapshot: 'Mojito', quantidade: 1 }
+    ]
+  },
+  {
+    id: '#0043',
+    status: 'PENDENTE',
+    tipo_entrega: 'MESA',
+    criado_em: new Date(Date.now() - 2 * 60000).toISOString(), // 2 minutos atrás
+    mesa: { numero: '08' },
+    comanda: { cliente: { nome: 'Arthur', cpf: '45678912333' } },
+    item_pedido: [
+      { nome_produto_snapshot: 'Negroni', quantidade: 1 },
+      { nome_produto_snapshot: 'Vodka Cranberry', quantidade: 1, observacao: 'Sem açúcar' }
+    ]
+  }
+];
+
 export default function KDSHome() {
   return (
     <main className="flex flex-col h-screen w-full overflow-hidden">
@@ -16,16 +59,12 @@ export default function KDSHome() {
           </div>
           <div className="flex flex-col items-center">
             <span className="text-status-yellow text-sm tracking-wider mb-1">Preparo</span>
-            <span className="text-4xl text-status-yellow">3</span>
-          </div>
-          <div className="flex flex-col items-center">
-            <span className="text-status-green text-sm tracking-wider mb-1">Prontos</span>
-            <span className="text-4xl text-status-green">1</span>
+            <span className="text-4xl text-status-yellow">1</span>
           </div>
         </div>
 
         <div className="text-4xl font-bold font-mono">
-          20:08
+          {new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
         </div>
       </header>
 
@@ -35,10 +74,12 @@ export default function KDSHome() {
         {/* Lado Esquerdo: Área dos Pedidos */}
         <div className="flex-1 p-6 overflow-y-auto no-scrollbar">
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 1</div>
-            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 2</div>
-            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 3</div>
-            <div className="h-[400px] border-2 border-dashed border-gray-700 rounded-xl flex items-center justify-center text-gray-500 text-xl font-bold">Área do Card 4</div>
+            
+            {/* A MÁGICA ACONTECE AQUI: Ele lê a lista de mentirinha e cria um Card pra cada um */}
+            {mockPedidos.map((pedido) => (
+              <OrderCard key={pedido.id} pedido={pedido} />
+            ))}
+
           </div>
         </div>
 
@@ -54,14 +95,6 @@ export default function KDSHome() {
               <span className="font-semibold text-lg">Caipirinha Limão</span>
             </div>
             <span className="bg-badge-purple px-4 py-1 rounded-md font-bold text-lg">2</span>
-          </div>
-
-          <div className="bg-fluxe-card border border-gray-800 rounded-lg p-5 flex justify-between items-center mb-3">
-            <div className="flex items-center gap-3">
-              <span className="text-gray-400 text-xl">🥃</span>
-              <span className="font-semibold text-lg">Whisky Double</span>
-            </div>
-            <span className="bg-badge-purple px-4 py-1 rounded-md font-bold text-lg">1</span>
           </div>
         </aside>
 
